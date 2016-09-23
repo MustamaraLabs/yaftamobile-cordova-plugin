@@ -1,0 +1,29 @@
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.yaftamobile.plugin.cordova" version="1.0.0">
+	<name>YaftaMobilePlugin</name>
+	<description>YaftaMobile Plugin for Cordova</description>
+	<js-module name="YaftaMobile" src="www/YaftaMobile.js">
+		<clobbers target="YaftaMobile"/>
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="YaftaMobileBridge">
+				<param name="android-package" value="com.yaftamobile.plugin.cordova.YaftaMobileBridge"/>
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+		</config-file>
+
+		<config-file parent="/manifest/application" target="AndroidManifest.xml">
+			<meta-data android:name="com.yaftamobile.sdk.app.id" android:value="$APP_ID" />
+
+			<activity android:name="com.yaftamobile.sdk.ads.interstitial.InterstitialActivity" android:configChanges="keyboard|keyboardHidden|orientation" />
+		</config-file>
+		<preference name="APP_ID" />
+		<framework src="com.google.android.gms:play-services-ads:+" />
+		<source-file src="src/android/libs/YaftaMobileAndroidSDK-1.2.0.jar" target-dir="libs" framework="true" />
+		<source-file src="src/android/libs/yaftamobile-cordova-bridge.jar" target-dir="libs"  />
+
+	</platform>
+</plugin>
